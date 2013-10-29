@@ -15,13 +15,13 @@ class Command(BaseCommand):
     """
     option_list = BaseCommand.option_list + (
          make_option('--dry',
-         	action="store_true",
-         	dest="dry",
+            action="store_true",
+            dest="dry",
             help='Dry run, does not actually scramble data. Default False.',
             default=False),
          make_option('--quiet',
-         	action="store_false",
-         	dest="verbose",
+            action="store_false",
+            dest="verbose",
             help='Be quiet. Default False.',
             default=True),
     )
@@ -45,11 +45,24 @@ EXAMPLE:
 
             if not dry:
 
-                new_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(24))
-                new_email = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(12)) + '@' + ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(24)) + '.com'
+                new_password = randomString(24)
+                new_email = randomString(12) + '@' + randomString(12) + '.com'
 
                 user.set_password(new_password)
                 user.email = new_email
+
+                if settings.DEVSAFE_FIELDS:
+                    profile = user.get_profile()
+
+                    for field in settings.DEVSAFE_FIELDS:
+                        try:
+                            setattr(profile, field, randomString(12))
+                        except Exception, e:
+                            print e
+
+                    profile.save()
+
                 user.save()
 
-
+def randomString(size):
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(size))
