@@ -3,7 +3,7 @@
 django-devsafe
 ==============
 
-Safely work with a production database in an insecure environment. ''django-devsafe'' scrambles sensitive user data so that you don't accidentally expose the private information of your users during testing.
+Safely work with a production database in an insecure environment. **django-devsafe** scrambles sensitive user data so that you don't accidentally expose the private information of your users during testing.
 
 Quick start
 -----------
@@ -23,7 +23,8 @@ Quick start
     )
     ```
 
-2. Optionally, you can use your settings file to define additional profile fields to scramble. Your User object must have a get_profile() method to access these fields.
+2. Optionally, you can use your settings file to define additional profile fields to scramble. Your User object must
+have a **get_profile()** method to access these fields.
 
     ```python
     DEVSAFE_FIELDS = ['secret_payment_token', 'secret_api_key']
