@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-from mail_templated import send_mail
 from optparse import make_option
 import random
 import string
