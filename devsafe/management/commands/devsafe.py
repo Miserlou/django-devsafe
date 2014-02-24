@@ -51,7 +51,13 @@ EXAMPLE:
                 user.email = new_email
 
                 if settings.DEVSAFE_FIELDS:
-                    profile = user.get_profile()
+                    try:
+                        profile = user.get_profile()
+                    except Exception, e:
+                        if verbose:
+                            print "Problem with user:", str(user.email)
+                            print e
+                        continue
 
                     for field in settings.DEVSAFE_FIELDS:
                         try:
