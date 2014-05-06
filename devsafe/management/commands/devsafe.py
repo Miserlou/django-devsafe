@@ -36,11 +36,14 @@ EXAMPLE:
 
         # Get Users
         users = User.objects.filter(Q(is_staff=False) | Q(is_superuser=False)).order_by('-date_joined')
+        num_users = len(users)
 
+        count = 0
         for user in users:
+            count = count + 1
 
             if verbose:
-                print "Scrambling " +  str(user.username) + ' (' + str(user.email) + ').'
+                print "Scrambling " +  str(user.username) + ' (' + str(user.email) + ').' + ' [' + str(count) + '/' + str(num_users) + ']'
 
             if not dry:
 
